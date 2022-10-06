@@ -1,14 +1,15 @@
 # Online Barter App Project G3
 
 
-* *Date Created*:
-* *Last Modification Date*:
+* *Date Created*: Thursday October, 6th
+* *Last Modification Date*: Thursday October, 6th
 * *Lab URL*:
 * *Git URL*:
 
 ## Authors
 
 * [Full Name](email@dal.ca) - *(Developer)*
+- Tyler Bechtold ty907567@dal.ca - Developer
 
 ### Prerequisites
 
