@@ -3,13 +3,13 @@
 
 * *Date Created*: Thursday October, 6th
 * *Last Modification Date*: Thursday October, 6th
-* *Lab URL*:
 * *Git URL*:
 
 ## Authors
 
 * [Full Name](email@dal.ca) - *(Developer)*
 - Tyler Bechtold ty907567@dal.ca - Developer
+' [Carmahn McCalla](cmccalla@dal.ca) - *(Developer)*
 
 ### Prerequisites
 
