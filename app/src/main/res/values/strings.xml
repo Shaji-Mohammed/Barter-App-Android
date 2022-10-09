@@ -10,4 +10,5 @@
     <string name="forgotpass">Forgot Password?</string>
     <string name="usertitle">Username</string>
     <string name="passtitle">Password</string>
+    <string name="noaccount">Don\'t Have an Account?</string>
 </resources>
