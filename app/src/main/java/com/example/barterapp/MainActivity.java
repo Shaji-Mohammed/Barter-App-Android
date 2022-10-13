@@ -3,6 +3,7 @@ package com.example.barterapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,8 +15,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.*;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     EditText email;
     EditText password;
     Button register;
+    Button btnLogout;
 
     private FirebaseAuth firebaseAuth;
 
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         register = findViewById(R.id.register);
+        btnLogout = findViewById(R.id.btnLogout);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,14 +55,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        firebaseAuth = FirebaseAuth.getInstance();
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firebaseAuth.signOut();
+                Intent intentf = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intentf);
+                finish();
+                Toast.makeText(MainActivity.this, "Logout Successful", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+                firebaseAuth = FirebaseAuth.getInstance();
+
     }
+
 
     @Override
     protected void onStart() {
         super.onStart();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user != null) {
+
         }
     }
 
@@ -107,12 +124,12 @@ public class MainActivity extends AppCompatActivity {
             isError = true;
         }
 
-        if (isEmail(email) == false) {
+        if (!isEmail(email)) {
             email.setError("Enter valid email");
             isError = true;
         }
 
-        if (isPassword(password) == false) {
+        if (!isPassword(password)) {
             password.setError("Password is required");
             isError = true;
         }
