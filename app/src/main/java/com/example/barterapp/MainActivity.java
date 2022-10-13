@@ -7,9 +7,6 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
-//package com.codebrainer.registration.registration;
-
-//import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -60,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        if (user != null) {
-        }
     }
 
     private void registerUser(String email, String password) {
@@ -78,47 +73,44 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    boolean isEmail(EditText text) {
-        CharSequence email = text.getText().toString();
+    boolean isEmail(String email) {
         return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
     }
 
-    boolean isPassword(EditText text) {
-        CharSequence password = text.getText().toString();
+    boolean isPassword(String password) {
         return !TextUtils.isEmpty(password);
     }
 
-    boolean isEmpty(EditText text) {
-        CharSequence str = text.getText().toString();
+    boolean isEmpty(String str) {
         return TextUtils.isEmpty(str);
     }
 
     void checkDataEntered() {
         boolean isError = false;
 
-        if (isEmpty(firstName)) {
+        if (isEmpty(firstName.getText().toString())) {
             Toast t = Toast.makeText(this, "You must enter first name to register!", Toast.LENGTH_SHORT);
             t.show();
             isError = true;
         }
 
-        if (isEmpty(lastName)) {
+        if (isEmpty(lastName.getText().toString())) {
             lastName.setError("Last name is required");
             isError = true;
         }
 
-        if (isEmail(email) == false) {
+        if (!isEmail(email.getText().toString())) {
             email.setError("Enter valid email");
             isError = true;
         }
 
-        if (isPassword(password) == false) {
+        if (!isPassword(password.getText().toString())) {
             password.setError("Password is required");
             isError = true;
         }
 
         if (!isError) {
-            registerUser("hello@hi.com", "password");
+            registerUser(email.getText().toString(), password.getText().toString());
         }
     }
 }
