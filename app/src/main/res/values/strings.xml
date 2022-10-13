@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">barterapp</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="loginbtn">LOGIN</string>
+    <string name="regbtn">Register Button</string>
+    <string name="regibtn">REGISTER</string>
+    <string name="or">OR</string>
+    <string name="forgotpass">Forgot Password?</string>
+    <string name="usertitle">Username</string>
+    <string name="passtitle">Password</string>
+    <string name="noaccount">Don\'t Have an Account?</string>
 </resources>
