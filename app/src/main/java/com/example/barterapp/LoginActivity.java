@@ -63,7 +63,22 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void submitLoginForm() {
-        firebaseAuth.signInWithEmailAndPassword(email.getText().toString(), email.getText().toString())
+        boolean hasError = false;
+
+        if (email.getText().toString().isEmpty()) {
+            email.setError("Email is required");
+            hasError = true;
+        }
+        if (password.getText().toString().isEmpty()) {
+            password.setError("Password is required");
+            hasError = true;
+        }
+
+        if (hasError) {
+            return;
+        }
+
+        firebaseAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
