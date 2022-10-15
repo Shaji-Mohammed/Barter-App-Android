@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-    <ImageView
-        android:layout_width="159dp"
-        android:layout_height="145dp"
-        android:src="@drawable/loginimg"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.523"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.034" />
-
     <TextView
         android:id="@+id/logintitle"
         android:layout_width="wrap_content"
@@ -56,11 +45,11 @@
         app:layout_constraintVertical_bias="0.261" />
 
     <EditText
-        android:id="@+id/enteruser"
+        android:id="@+id/login_email"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:autofillHints="username"
-        android:hint="@string/username"
+        android:hint="Email"
         android:inputType="text"
         android:padding="15dp"
         android:textColor="#5C5C5C"
@@ -72,7 +61,7 @@
         app:layout_constraintVertical_bias="0.327" />
 
     <EditText
-        android:id="@+id/enterpass"
+        android:id="@+id/login_password"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:autofillHints="password"
@@ -88,10 +77,11 @@
         app:layout_constraintVertical_bias="0.506" />
 
     <Button
-        android:id="@+id/loginbtn"
+        android:id="@+id/login_submit"
         android:layout_width="298dp"
         android:layout_height="93dp"
         android:layout_marginBottom="108dp"
+        android:clickable="true"
         android:padding="30dp"
         android:text="@string/loginbtn"
         android:textColor="#FFFFFF"
@@ -101,7 +91,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/regbtn"
+        android:id="@+id/login_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -117,6 +107,7 @@
         android:id="@+id/forgotpass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="false"
         android:text="@string/forgotpass"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
