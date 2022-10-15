@@ -21,6 +21,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.regex.Pattern;
+
 public class MainActivity extends AppCompatActivity {
 
     EditText firstName;
@@ -74,15 +76,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     boolean isEmail(String email) {
-        return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
+        if (email == null) {
+            return false;
+        }
+        boolean empty = email.isEmpty();
+        boolean valid = Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$").matcher(email).matches();
+        return !empty && valid;
     }
 
     boolean isPassword(String password) {
-        return !TextUtils.isEmpty(password);
+        return !password.isEmpty();
     }
 
     boolean isEmpty(String str) {
-        return TextUtils.isEmpty(str);
+        if (str == null) {
+            return true;
+        }
+        return str.isEmpty();
     }
 
     void checkDataEntered() {
