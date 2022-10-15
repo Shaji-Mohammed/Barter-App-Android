@@ -19,9 +19,9 @@ public class ExampleUnitTest {
     public void productTest() {
         Product product = new Product();
 
-        assertNull(product.name);
-//        assertNull(product.value);
-        assertNull(product.seller);
+        assertEquals(product.name, null);
+        assertEquals(product.value, 0);
+        assertEquals(product.seller, null);
 
     }
 }
