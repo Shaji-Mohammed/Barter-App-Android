@@ -9,11 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import android.view.View;
-<<<<<<< HEAD
 import android.widget.*;
-=======
->>>>>>> main
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,11 +27,8 @@ public class MainActivity extends AppCompatActivity {
     EditText email;
     EditText password;
     Button register;
-<<<<<<< HEAD
     Button btnLogout;
-=======
     Button login;
->>>>>>> main
 
     private FirebaseAuth firebaseAuth;
 
@@ -48,13 +41,9 @@ public class MainActivity extends AppCompatActivity {
         lastName = findViewById(R.id.lastName);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
-<<<<<<< HEAD
-        register = findViewById(R.id.register);
         btnLogout = findViewById(R.id.btnLogout);
-=======
         register = findViewById(R.id.register_submit);
         login = findViewById(R.id.register_login);
->>>>>>> main
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-<<<<<<< HEAD
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,14 +66,12 @@ public class MainActivity extends AppCompatActivity {
 
                 firebaseAuth = FirebaseAuth.getInstance();
 
-=======
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { switchToLoginWindow(); }
         });
 
         firebaseAuth = FirebaseAuth.getInstance();
->>>>>>> main
     }
 
 
@@ -93,12 +79,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         FirebaseUser user = firebaseAuth.getCurrentUser();
-<<<<<<< HEAD
-        if (user != null) {
-
-        }
-=======
->>>>>>> main
     }
 
     private void registerUser(String email, String password) {
@@ -154,20 +134,12 @@ public class MainActivity extends AppCompatActivity {
             isError = true;
         }
 
-<<<<<<< HEAD
-        if (!isEmail(email)) {
-=======
         if (!isEmail(email.getText().toString())) {
->>>>>>> main
             email.setError("Enter valid email");
             isError = true;
         }
 
-<<<<<<< HEAD
-        if (!isPassword(password)) {
-=======
         if (!isPassword(password.getText().toString())) {
->>>>>>> main
             password.setError("Password is required");
             isError = true;
         }
