@@ -8,8 +8,13 @@ import android.widget.EditText;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
+<<<<<<< HEAD
 import android.widget.TextView;
 import android.widget.Toast;
+=======
+import android.widget.*;
+
+>>>>>>> main
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -23,7 +28,12 @@ public class MainActivity extends AppCompatActivity {
     EditText email;
     EditText password;
     Button register;
+<<<<<<< HEAD
     boolean isError = false;
+=======
+    Button btnLogout;
+    Button login;
+>>>>>>> main
 
     private FirebaseAuth firebaseAuth;
 
@@ -36,8 +46,14 @@ public class MainActivity extends AppCompatActivity {
         lastName = findViewById(R.id.lastName);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
+<<<<<<< HEAD
         register = findViewById(R.id.register);
 
+=======
+        btnLogout = findViewById(R.id.btnLogout);
+        register = findViewById(R.id.register_submit);
+        login = findViewById(R.id.register_login);
+>>>>>>> main
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,8 +63,31 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+<<<<<<< HEAD
+=======
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firebaseAuth.signOut();
+                Intent intentf = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intentf);
+                finish();
+                Toast.makeText(MainActivity.this, "Logout Successful", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+                firebaseAuth = FirebaseAuth.getInstance();
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { switchToLoginWindow(); }
+        });
+
+>>>>>>> main
         firebaseAuth = FirebaseAuth.getInstance();
     }
+
 
     @Override
     protected void onStart() {
