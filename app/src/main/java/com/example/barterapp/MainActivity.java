@@ -2,22 +2,14 @@ package com.example.barterapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-
-//package com.codebrainer.registration.registration;
-
-//import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -28,10 +20,10 @@ public class MainActivity extends AppCompatActivity {
 
     EditText firstName;
     EditText lastName;
-    EditText address;
     EditText email;
     EditText password;
     Button register;
+    boolean isError = false;
 
     private FirebaseAuth firebaseAuth;
 
@@ -46,9 +38,11 @@ public class MainActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
         register = findViewById(R.id.register);
 
+
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                isError = false;
                 checkDataEntered();
             }
         });
@@ -77,7 +71,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
-
+    protected void setStatusMessage(String message) {
+        TextView statusLabel = findViewById(R.id.statusLabel);
+        statusLabel.setText(message.trim());
+        isError = true;
+    }
     boolean isEmail(EditText text) {
         CharSequence email = text.getText().toString();
         return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
@@ -92,33 +90,20 @@ public class MainActivity extends AppCompatActivity {
         CharSequence str = text.getText().toString();
         return TextUtils.isEmpty(str);
     }
-
     void checkDataEntered() {
-        boolean isError = false;
+        String emptyField = "This field is empty";
+        String emailError = "This email is invalid";
 
         if (isEmpty(firstName)) {
             Toast t = Toast.makeText(this, "You must enter first name to register!", Toast.LENGTH_SHORT);
             t.show();
-            isError = true;
+            setStatusMessage(emptyField);
         }
 
-        if (isEmpty(lastName)) {
-            lastName.setError("Last name is required");
-            isError = true;
-        }
+        if (isEmpty(lastName)) {setStatusMessage(emptyField);}
+        if (!isEmail(email)) {setStatusMessage(emailError);}
+        if (!isPassword(password)) {setStatusMessage(emptyField);}
 
-        if (isEmail(email) == false) {
-            email.setError("Enter valid email");
-            isError = true;
-        }
-
-        if (isPassword(password) == false) {
-            password.setError("Password is required");
-            isError = true;
-        }
-
-        if (!isError) {
-            registerUser("hello@hi.com", "password");
-        }
+        if(!isError){registerUser(email.toString(), password.toString());}
     }
 }
