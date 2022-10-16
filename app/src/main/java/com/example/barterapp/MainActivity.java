@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import android.view.View;
-import android.widget.Toast;
+import android.widget.*;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     EditText email;
     EditText password;
     Button register;
+    Button btnLogout;
     Button login;
 
     private FirebaseAuth firebaseAuth;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         lastName = findViewById(R.id.lastName);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
+        btnLogout = findViewById(R.id.btnLogout);
         register = findViewById(R.id.register_submit);
         login = findViewById(R.id.register_login);
 
@@ -50,6 +52,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firebaseAuth.signOut();
+                Intent intentf = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intentf);
+                finish();
+                Toast.makeText(MainActivity.this, "Logout Successful", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+                firebaseAuth = FirebaseAuth.getInstance();
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { switchToLoginWindow(); }
@@ -57,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
     }
+
 
     @Override
     protected void onStart() {
