@@ -35,16 +35,24 @@
         app:layout_constraintTop_toBottomOf="@+id/firstName" />
 
     <Button
-        android:id="@+id/register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/register_submit"
+        android:layout_width="203dp"
+        android:layout_height="43dp"
         android:layout_marginStart="147dp"
         android:layout_marginEnd="170dp"
+<<<<<<< HEAD
         android:layout_marginBottom="232dp"
         android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.75"
+=======
+        android:layout_marginBottom="208dp"
+        android:text="Register"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.394"
+>>>>>>> a8eff51fcd198c9d86b4a2780b93fed8518f057c
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -76,6 +84,7 @@
         app:layout_constraintTop_toBottomOf="@+id/lastName" />
 
     <TextView
+<<<<<<< HEAD
         android:id="@+id/statusLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -86,5 +95,23 @@
         app:layout_constraintHorizontal_bias="0.458"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register" />
+=======
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="43dp"
+        android:text="Have an account?"
+        app:layout_constraintTop_toTopOf="@+id/register_submit"
+        tools:layout_editor_absoluteX="150dp" />
+
+    <Button
+        android:id="@+id/register_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:text="Login"
+        app:layout_constraintTop_toTopOf="@+id/textView4"
+        tools:layout_editor_absoluteX="161dp" />
+>>>>>>> a8eff51fcd198c9d86b4a2780b93fed8518f057c
 
 </androidx.constraintlayout.widget.ConstraintLayout>
