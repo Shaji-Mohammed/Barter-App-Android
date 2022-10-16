@@ -30,8 +30,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-<<<<<<< HEAD
-=======
 
         submitButton = findViewById(R.id.login_submit);
         registerButton = findViewById(R.id.login_register);
@@ -51,7 +49,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         firebaseAuth = FirebaseAuth.getInstance();
->>>>>>> main
     }
 
     @Override
