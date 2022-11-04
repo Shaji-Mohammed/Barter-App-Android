@@ -17,11 +17,11 @@ public class ExampleUnitTest {
 
     @Test
     public void productTest() {
-        Product product = new Product();
+        Item item = new Item();
 
-        assertEquals(product.name, null);
-        assertEquals(product.value, 0);
-        assertEquals(product.seller, null);
+        assertNull(item.name);
+        assertEquals(item.value, 0);
+        assertNull(item.owner);
 
     }
 }
