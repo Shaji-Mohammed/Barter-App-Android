@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     protected void switchToRegisterWindow() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 
