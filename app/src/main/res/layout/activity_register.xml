@@ -54,7 +54,7 @@
             android:hint="Email" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/register_submit"
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:layout_marginTop="16dp"

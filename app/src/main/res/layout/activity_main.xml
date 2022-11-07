@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextStateName" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/register_submit"
         android:layout_width="203dp"
         android:layout_height="43dp"
         android:layout_marginStart="147dp"
@@ -65,7 +65,7 @@
         android:layout_marginTop="16dp"
         android:text="cityName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5" />
+        app:layout_constraintTop_toBottomOf="@+id/register_submit" />
 
     <TextView
         android:id="@+id/stateName"
@@ -107,6 +107,6 @@
         android:inputType="textPersonName"
         android:text="City Name:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5" />
+        app:layout_constraintTop_toBottomOf="@+id/register_submit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
