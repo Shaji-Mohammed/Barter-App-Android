@@ -65,11 +65,11 @@ public class LoginActivity extends AppCompatActivity {
     private void submitLoginForm() {
         boolean hasError = false;
 
-        if (email.getText().toString().isEmpty()) {
-            email.setError("Email is required");
+        if (!FormValidator.isValidEmail(email.getText().toString())) {
+            email.setError("Invalid Email");
             hasError = true;
         }
-        if (password.getText().toString().isEmpty()) {
+        if (FormValidator.isEmpty(password.getText().toString())) {
             password.setError("Password is required");
             hasError = true;
         }
