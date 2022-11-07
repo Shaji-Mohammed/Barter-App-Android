@@ -22,11 +22,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     EditText firstName;
     EditText lastName;
-    EditText address;
     EditText email;
     EditText password;
     Button register;
-    Button btnLogout;
     Button login;
 
     private FirebaseAuth firebaseAuth;
@@ -40,7 +38,6 @@ public class RegisterActivity extends AppCompatActivity {
         lastName = findViewById(R.id.lastName);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
-        btnLogout = findViewById(R.id.btnLogout);
         register = findViewById(R.id.register_submit);
         login = findViewById(R.id.register_login);
 
@@ -48,18 +45,6 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 checkDataEntered();
-            }
-        });
-
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                firebaseAuth.signOut();
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-                Toast.makeText(RegisterActivity.this, "Logout Successful", Toast.LENGTH_SHORT).show();
-
             }
         });
 
@@ -87,6 +72,8 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(RegisterActivity.this, "Registered", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(RegisterActivity.this, ItemFeedActivity.class);
+                            startActivity(intent);
                         } else {
                             Toast.makeText(RegisterActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }

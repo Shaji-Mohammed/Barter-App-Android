@@ -72,15 +72,8 @@
             android:layout_width="100dp"
             android:layout_height="60dp"
             android:layout_marginTop="20dp"
-            android:text="Login" />
-
-        <Button
-            android:id="@+id/btnLogout"
-            android:layout_width="105dp"
-            android:layout_height="57dp"
-            android:layout_marginTop="20dp"
-            android:text="Logout"
-            tools:layout_editor_absoluteX="150dp" />
+            android:text="Login"
+            app:backgroundTint="#171717" />
 
     </LinearLayout>
 
