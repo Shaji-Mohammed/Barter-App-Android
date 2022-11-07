@@ -2,6 +2,7 @@ package com.example.barterapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ public class TradeCreationFormActivity extends AppCompatActivity {
 
     EditText itemEditText;
     EditText descEditText;
+    Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,17 @@ public class TradeCreationFormActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) { createItem(); }
         });
+
+        Button backButton = findViewById(R.id.createTradeFormBack);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { switchToItemFeedWindow(); }
+        });
+    }
+
+    public void switchToItemFeedWindow() {
+        Intent intent = new Intent(this, ItemFeedActivity.class);
+        startActivity(intent);
     }
 
     public void createItem() {
