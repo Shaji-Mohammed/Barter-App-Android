@@ -99,45 +99,25 @@ public class RegisterActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    boolean isEmail(String email) {
-        if (email == null) {
-            return false;
-        }
-        boolean empty = email.isEmpty();
-        boolean valid = Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$").matcher(email).matches();
-        return !empty && valid;
-    }
-
-    boolean isPassword(String password) {
-        return !password.isEmpty();
-    }
-
-    boolean isEmpty(String str) {
-        if (str == null) {
-            return true;
-        }
-        return str.isEmpty();
-    }
-
     void checkDataEntered() {
         boolean isError = false;
 
-        if (isEmpty(firstName.getText().toString())) {
+        if (FormValidator.isEmpty(firstName.getText().toString())) {
             firstName.setError("First name is required");
             isError = true;
         }
 
-        if (isEmpty(lastName.getText().toString())) {
+        if (FormValidator.isEmpty(lastName.getText().toString())) {
             lastName.setError("Last name is required");
             isError = true;
         }
 
-        if (!isEmail(email.getText().toString())) {
+        if (!FormValidator.isValidEmail(email.getText().toString())) {
             email.setError("Enter valid email");
             isError = true;
         }
 
-        if (!isPassword(password.getText().toString())) {
+        if (!FormValidator.isValidPassword(password.getText().toString())) {
             password.setError("Password is required");
             isError = true;
         }

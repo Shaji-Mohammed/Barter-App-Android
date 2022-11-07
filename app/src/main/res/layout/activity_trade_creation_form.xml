@@ -42,7 +42,7 @@
             android:text="Description" />
 
         <EditText
-            android:id="@+id/editTextTextMultiLine"
+            android:id="@+id/createItemFormDesc"
             android:layout_width="match_parent"
             android:layout_height="146dp"
             android:ems="10"
