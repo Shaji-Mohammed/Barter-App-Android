@@ -10,6 +10,7 @@
 * [Full Name](email@dal.ca) - *(Developer)*
 - Tyler Bechtold ty907567@dal.ca - Developer
 ' [Carmahn McCalla](cmccalla@dal.ca) - *(Developer)*
+- Mehjabeen Bushra Reza - Developer
 
 ### Prerequisites
 
