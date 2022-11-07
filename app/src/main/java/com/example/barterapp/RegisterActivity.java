@@ -41,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         btnLogout = findViewById(R.id.btnLogout);
-        register = findViewById(R.id.register_submit);
+        register = findViewById(R.id.button5);
         login = findViewById(R.id.register_login);
 
         register.setOnClickListener(new View.OnClickListener() {
