@@ -12,4 +12,9 @@
     <string name="usertitle">Username</string>
     <string name="passtitle">Password</string>
     <string name="noaccount">Don\'t Have an Account?</string>
+
+    <string name="title_activity_post_listings">Quick Cash</string>
+    <string name="place_holder_title">Place holder title</string>
+    <string name="_12_34">12.34</string>
+    <string name="add_picture_image">Add picture image</string>
 </resources>
