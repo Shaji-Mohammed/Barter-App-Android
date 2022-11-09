@@ -41,7 +41,9 @@ If in completing your project you used any interpretation of someone else's code
 
 
 ```
-1.
+1. Source code for getting Location of user: https://medium.com/@grudransh1/best-way-to-get-users-location-in-android-app-using-location-listener-from-java-in-android-studio-77882f8b87fd
+
+This code was used to develop the location feature of our app. It was modified and changed in order to fit the frame and needs of our application. Not all of it was directly translatable and was ommitted. It was used as I was unable to integrate a Google Maps Activity into the project as I was getting unresolvable AndroidManifest errors. Not all of the code was implemented like the editable XML file that they attempt to implement. The TOAST function is the primary indication of implementation.
 
 
 ```
