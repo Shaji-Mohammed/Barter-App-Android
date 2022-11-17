@@ -14,4 +14,14 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
+
+    @Test
+    public void productTest() {
+        Item item = new Item();
+
+        assertNull(item.name);
+        assertEquals(item.value, 0);
+        assertNull(item.owner);
+
+    }
 }
