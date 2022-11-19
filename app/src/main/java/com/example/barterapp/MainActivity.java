@@ -1,148 +1,149 @@
 package com.example.barterapp;
 
-import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
+import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.*;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.EditText;
-import android.text.TextUtils;
-import android.util.Patterns;
+import android.os.CountDownTimer;
+import android.provider.Settings;
 import android.view.View;
-<<<<<<< HEAD
-import android.widget.TextView;
-import android.widget.Toast;
-=======
 import android.widget.*;
 
->>>>>>> main
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText firstName;
-    EditText lastName;
-    EditText email;
-    EditText password;
-    Button register;
-<<<<<<< HEAD
-    boolean isError = false;
-=======
-    Button btnLogout;
-    Button login;
->>>>>>> main
+    private LocationManager locationManager;
+    private String provider;
+    private MyLocationListener mylistener;
+    Button button5;
 
-    private FirebaseAuth firebaseAuth;
-
+    //@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    //@SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        button5 = findViewById(R.id.register_submit);
 
-        firstName = findViewById(R.id.firstName);
-        lastName = findViewById(R.id.lastName);
-        email = findViewById(R.id.email);
-        password = findViewById(R.id.password);
-<<<<<<< HEAD
-        register = findViewById(R.id.register);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-=======
-        btnLogout = findViewById(R.id.btnLogout);
-        register = findViewById(R.id.register_submit);
-        login = findViewById(R.id.register_login);
->>>>>>> main
+        // user defines the criteria
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);   //default
+        criteria.setCostAllowed(false);
+        // get the best provider depending on the criteria
+        provider = locationManager.getBestProvider(criteria, false);
+        if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                isError = false;
-                checkDataEntered();
-            }
-        });
-
-<<<<<<< HEAD
-=======
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                firebaseAuth.signOut();
-                Intent intentf = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intentf);
-                finish();
-                Toast.makeText(MainActivity.this, "Logout Successful", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-                firebaseAuth = FirebaseAuth.getInstance();
-
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) { switchToLoginWindow(); }
-        });
-
->>>>>>> main
-        firebaseAuth = FirebaseAuth.getInstance();
-    }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        if (user != null) {
+            int REQUEST_LOCATION = 99;
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]
+                    {ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
         }
-    }
 
-    private void registerUser(String email, String password) {
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this, "Registered", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(MainActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+        final Location location = locationManager.getLastKnownLocation(provider);
+
+        mylistener = new MyLocationListener();
+
+
+        button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if (location != null) {
+
+                    mylistener.onLocationChanged(location);
+                } else {
+                    // leads to the settings because there is no last known location
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+                    //Using 12 seconds timer till it gets location
+                    final AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                    alertDialog.setTitle("Obtaining Location ...");
+                    alertDialog.setMessage("00:12");
+                    alertDialog.show();
+
+                    new CountDownTimer(12000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+                            alertDialog.setMessage("00:" + (millisUntilFinished / 1000));
                         }
+
+                        @Override
+                        public void onFinish() {
+                            alertDialog.dismiss();
+                        }
+                    }.start();
+                }
+                if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // this will be automatically asked to be implemented
+                }
+                // location updates: at least 1 meter and 200millsecs change
+                locationManager.requestLocationUpdates(provider, 200, 1, mylistener);
+                if(location!=null) {
+                    Double lat = location.getLatitude();
+                    Double lon = location.getLongitude();
+
+                    Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
+                    List<Address> addresses = null;
+                    try {
+                        addresses = geocoder.getFromLocation(lat, lon, 1);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                });
-    }
-    protected void setStatusMessage(String message) {
-        TextView statusLabel = findViewById(R.id.statusLabel);
-        statusLabel.setText(message.trim());
-        isError = true;
-    }
-    boolean isEmail(EditText text) {
-        CharSequence email = text.getText().toString();
-        return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
-    }
+                    String cityName = addresses.get(0).getLocality();
+                    String stateName = addresses.get(0).getAdminArea();
+                    String countryName = addresses.get(0).getCountryName();
+                    String postalCode = addresses.get(0).getPostalCode();
+                    //set text of xml file
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Please open your location", Toast.LENGTH_SHORT).show();
+                }
 
-    boolean isPassword(EditText text) {
-        CharSequence password = text.getText().toString();
-        return !TextUtils.isEmpty(password);
-    }
 
-    boolean isEmpty(EditText text) {
-        CharSequence str = text.getText().toString();
-        return TextUtils.isEmpty(str);
+            }
+        });
     }
-    void checkDataEntered() {
-        String emptyField = "This field is empty";
-        String emailError = "This email is invalid";
+    private class MyLocationListener implements LocationListener {
 
-        if (isEmpty(firstName)) {
-            Toast t = Toast.makeText(this, "You must enter first name to register!", Toast.LENGTH_SHORT);
-            t.show();
-            setStatusMessage(emptyField);
+        @Override
+        public void onLocationChanged(Location location) {
+            Toast.makeText(MainActivity.this, "" + location.getLatitude() + location.getLongitude(),
+                    Toast.LENGTH_SHORT).show();
+
+
         }
 
-        if (isEmpty(lastName)) {setStatusMessage(emptyField);}
-        if (!isEmail(email)) {setStatusMessage(emailError);}
-        if (!isPassword(password)) {setStatusMessage(emptyField);}
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+            Toast.makeText(MainActivity.this, provider + "'s status changed to " + status + "!",
+                    Toast.LENGTH_SHORT).show();
+        }
 
-        if(!isError){registerUser(email.toString(), password.toString());}
+        @Override
+        public void onProviderEnabled(String provider) {
+            Toast.makeText(MainActivity.this, "Provider " + provider + " enabled!",
+                    Toast.LENGTH_SHORT).show();
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+            Toast.makeText(MainActivity.this, "Provider " + provider + " disabled!",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 }

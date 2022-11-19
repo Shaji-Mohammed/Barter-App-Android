@@ -30,8 +30,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-<<<<<<< HEAD
-=======
 
 <<<<<<< HEAD
 //        Button b1 = (Button) findViewById(R.id)
@@ -55,7 +53,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         firebaseAuth = FirebaseAuth.getInstance();
->>>>>>> main
     }
 
     @Override
@@ -65,18 +62,18 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     protected void switchToRegisterWindow() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 
     private void submitLoginForm() {
         boolean hasError = false;
 
-        if (email.getText().toString().isEmpty()) {
-            email.setError("Email is required");
+        if (!FormValidator.isValidEmail(email.getText().toString())) {
+            email.setError("Invalid Email");
             hasError = true;
         }
-        if (password.getText().toString().isEmpty()) {
+        if (FormValidator.isEmpty(password.getText().toString())) {
             password.setError("Password is required");
             hasError = true;
         }
@@ -91,6 +88,9 @@ public class LoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         Toast.makeText(LoginActivity.this, "Logged In", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(LoginActivity.this,
+                                ItemFeedActivity.class);
+                        startActivity(intent);
                     } else {
                         Toast.makeText(LoginActivity.this, "Login failed.", Toast.LENGTH_SHORT).show();
                     }
