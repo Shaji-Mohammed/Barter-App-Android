@@ -1,5 +1,7 @@
 package com.example.barterapp;
 
+import android.media.Image;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -29,22 +31,32 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
             itemName = itemView.findViewById(R.id.textView6);
             seller = itemView.findViewById(R.id.textView7);
             value = itemView.findViewById(R.id.textView8);
+            image = itemView.findViewById(R.id.imageView);
         }
     }
 
     @NonNull
     @Override
     public recyclerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_items, parent, false);
+        return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull recyclerAdapter.MyViewHolder holder, int position) {
+        String itemName = itemsList.get(position).getName();
+        String seller = itemsList.get(position).getOwner();
+        String value = String.valueOf(itemsList.get(position).getValue());
+        Image image = itemsList.get(position).getImage();
 
+//        holder.image.setIma
+        holder.itemName.setText(itemName);
+        holder.seller.setText(seller);
+        holder.value.setText(value);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return itemsList.size();
     }
 }
