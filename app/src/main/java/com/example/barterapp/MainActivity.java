@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         criteria.setCostAllowed(false);
         // get the best provider depending on the criteria
         provider = locationManager.getBestProvider(criteria, false);
+
+
         if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
             int REQUEST_LOCATION = 99;
@@ -121,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onLocationChanged(Location location) {
+            //Toast to output longitude and latitude of user
             Toast.makeText(MainActivity.this, "" + location.getLatitude() + location.getLongitude(),
                     Toast.LENGTH_SHORT).show();
 
