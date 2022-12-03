@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,7 +33,7 @@ public class ChatActivity extends AppCompatActivity {
     ImageView sendButton;
     EditText messageArea;
     ScrollView scrollView;
-    private DatabaseReference reference1, reference2;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +49,9 @@ public class ChatActivity extends AppCompatActivity {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
 
         //Reference to Chat firebase url
-        reference1 = db.getReferenceFromUrl("https://chatapp-d78f4-default-rtdb.firebaseio.com/messages/" + UserDetails.username + "_" + UserDetails.chatWith);
-        reference2 = db.getReferenceFromUrl("https://chatapp-d78f4-default-rtdb.firebaseio.com/messages/" + UserDetails.chatWith + "_" + UserDetails.username);
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        //firebaseAuth = db.getReference( + UserDetails.chatWith + "_" + UserDetails.username);
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
