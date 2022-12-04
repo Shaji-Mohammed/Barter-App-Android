@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -24,12 +25,13 @@ public class ItemFeedActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_feed);
         itemsList = new ArrayList<>();
-//        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView);
 
         firebaseAuth = FirebaseAuth.getInstance();
         setItemInfo();
@@ -61,8 +63,9 @@ public class ItemFeedActivity extends AppCompatActivity {
 
     private void setItemInfo() {
         //Dummy data for testing
-        itemsList.add(new Item("Tesla Model S", 500, "Elon Musk", null));
-        itemsList.add(new Item("Mazda 6", 250, "Bob",null));
+//        itemsList.add(new Item("Tesla Model S", 500, "Elon Musk", null));
+//        itemsList.add(new Item("Mazda 6", 250, "Bob",null));
+//        itemsList.add(new Item("Toyota", 125, "KOMP",null));
     }
 
     public void switchToTradeCreationFormWindow() {

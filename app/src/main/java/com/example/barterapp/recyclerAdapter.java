@@ -53,6 +53,7 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
         holder.itemName.setText(itemName);
         holder.seller.setText(seller);
         holder.value.setText(value);
+//        holder.image.setImageURI();
     }
 
     @Override
