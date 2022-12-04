@@ -6,6 +6,7 @@ plugins {
 android {
     compileSdk 32
 
+
     defaultConfig {
         applicationId "com.example.barterapp"
         minSdk 19
@@ -28,6 +29,8 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+    namespace 'com.example.barterapp'
+
 }
 
 dependencies {

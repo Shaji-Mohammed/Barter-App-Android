@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 <!--    <item name="statusLabel" type="id">String</item>-->
+    <item name="btn" type="id">btn_id</item>
+    <item name="btn_id" type="id">String</item>
 </resources>

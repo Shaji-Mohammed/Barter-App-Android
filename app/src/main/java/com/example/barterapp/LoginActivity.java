@@ -31,9 +31,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-<<<<<<< HEAD
 //        Button b1 = (Button) findViewById(R.id)
-=======
+
         submitButton = findViewById(R.id.login_submit);
         registerButton = findViewById(R.id.login_register);
         email = findViewById(R.id.login_email);
@@ -45,7 +44,6 @@ public class LoginActivity extends AppCompatActivity {
                 submitLoginForm();
             }
         });
->>>>>>> a8eff51fcd198c9d86b4a2780b93fed8518f057c
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
