@@ -51,6 +51,14 @@ public class ItemFeedActivity extends AppCompatActivity {
                 switchToLoginWindow();
             }
         });
+
+        Button btn = (Button)findViewById(R.id.profile_button);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ItemFeedActivity.this, UserProfileActivity.class));
+            }
+        });
     }
 
     private void setAdapter() {
@@ -77,4 +85,7 @@ public class ItemFeedActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
+
+
+
 }
