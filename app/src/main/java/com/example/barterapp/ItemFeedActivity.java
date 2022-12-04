@@ -1,6 +1,7 @@
 package com.example.barterapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,12 +17,14 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ItemFeedActivity extends AppCompatActivity {
 
     private EditText searchQuery;
-    private ArrayList<Item> itemsList;
+    private List<Item> itemsList;
     private RecyclerView recyclerView;
+    private RecyclerAdapter adapter;
 
     FirebaseAuth firebaseAuth;
 
@@ -36,6 +39,21 @@ public class ItemFeedActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         setItemInfo();
         setAdapter();
+
+        SearchView searchView = findViewById(R.id.searchView);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return true;
+            }
+        });
 
         Button tradeCreationButton = findViewById(R.id.tradeCreationButton);
         tradeCreationButton.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +72,7 @@ public class ItemFeedActivity extends AppCompatActivity {
     }
 
     private void setAdapter() {
-        recyclerAdapter adapter = new recyclerAdapter(itemsList);
+        adapter = new RecyclerAdapter(itemsList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -66,6 +84,8 @@ public class ItemFeedActivity extends AppCompatActivity {
         itemsList.add(new Item("Tesla Model S", 500, "Elon Musk", null));
         itemsList.add(new Item("Mazda 6", 250, "Bob",null));
         itemsList.add(new Item("Toyota", 125, "KOMP",null));
+        itemsList.add(new Item("NIssan", 320, "Lamp",null));
+        itemsList.add(new Item("TTAA", 125, "KOMP",null));
     }
 
     public void switchToTradeCreationFormWindow() {
@@ -76,5 +96,20 @@ public class ItemFeedActivity extends AppCompatActivity {
     public void switchToLoginWindow() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
+    }
+
+    private void filterList(String text) {
+        List<Item> filteredList = new ArrayList<>();
+        for (Item item : itemsList) {
+            if (item.getName().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(item);
+            }
+        }
+
+        if (filteredList.isEmpty()) {
+            Toast.makeText(this,"No Item found",Toast.LENGTH_SHORT).show();
+        } else {
+            adapter.setFilteredList(filteredList);
+        }
     }
 }
