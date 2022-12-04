@@ -63,9 +63,9 @@ public class ItemFeedActivity extends AppCompatActivity {
 
     private void setItemInfo() {
         //Dummy data for testing
-//        itemsList.add(new Item("Tesla Model S", 500, "Elon Musk", null));
-//        itemsList.add(new Item("Mazda 6", 250, "Bob",null));
-//        itemsList.add(new Item("Toyota", 125, "KOMP",null));
+        itemsList.add(new Item("Tesla Model S", 500, "Elon Musk", null));
+        itemsList.add(new Item("Mazda 6", 250, "Bob",null));
+        itemsList.add(new Item("Toyota", 125, "KOMP",null));
     }
 
     public void switchToTradeCreationFormWindow() {

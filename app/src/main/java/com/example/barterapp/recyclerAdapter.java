@@ -28,17 +28,17 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
 
         public MyViewHolder(final View itemView) {
             super(itemView);
-            itemName = itemView.findViewById(R.id.textView6);
-            seller = itemView.findViewById(R.id.textView7);
-            value = itemView.findViewById(R.id.textView8);
-            image = itemView.findViewById(R.id.imageView);
+            itemName = itemView.findViewById(R.id.textView2);
+            seller = itemView.findViewById(R.id.textView3);
+            value = itemView.findViewById(R.id.textView);
+            image = itemView.findViewById(R.id.imageView3);
         }
     }
 
     @NonNull
     @Override
     public recyclerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_items, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout_card, parent, false);
         return new MyViewHolder(itemView);
     }
 
@@ -49,7 +49,6 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
         String value = String.valueOf(itemsList.get(position).getValue());
         Image image = itemsList.get(position).getImage();
 
-//        holder.image.setIma
         holder.itemName.setText(itemName);
         holder.seller.setText(seller);
         holder.value.setText(value);
