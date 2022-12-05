@@ -47,4 +47,30 @@ public class FormValidatorTest {
         assertFalse(FormValidator.isValidEmail(""));
         assertFalse(FormValidator.isEmpty("dw@dwca"));
     }
+
+    @Test
+    public void checkIfItemNameIsValid() {
+        assertTrue(FormValidator.isValidItemName("Cat"));
+        assertTrue(FormValidator.isValidItemDesc("Shirt"));
+    }
+
+    @Test
+    public void checkIfItemNameIsInvalid() {
+        assertFalse(FormValidator.isValidItemName("bo"));
+        assertFalse(FormValidator.isValidItemName("some super long name that shouldn't be valid"));
+        assertFalse(FormValidator.isValidItemName(null));
+    }
+
+    @Test
+    public void checkIfItemDescIsValid() {
+        assertTrue(FormValidator.isValidItemDesc("This is a small cat"));
+        assertTrue(FormValidator.isValidItemDesc("A bright blue shirt"));
+    }
+
+    @Test
+    public void checkIfItemDescIsInvalid() {
+        assertFalse(FormValidator.isValidItemDesc("smol"));
+        assertFalse(FormValidator.isValidItemDesc("a description can be super long so this will take a while to type now maybe it is too long."));
+        assertFalse(FormValidator.isValidItemDesc(null));
+    }
 }

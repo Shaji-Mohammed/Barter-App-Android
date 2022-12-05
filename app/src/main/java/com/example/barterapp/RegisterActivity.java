@@ -11,11 +11,17 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -28,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button login;
 
     private FirebaseAuth firebaseAuth;
+    private FirebaseFirestore firestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         firebaseAuth = FirebaseAuth.getInstance();
+        firestore = FirebaseFirestore.getInstance();
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,15 +73,30 @@ public class RegisterActivity extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
     }
 
-    private void registerUser(String email, String password) {
+    private void registerUser(String firstName, String lastName, String email, String password) {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(RegisterActivity.this, "Registered", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(RegisterActivity.this, ItemFeedActivity.class);
-                            startActivity(intent);
+                            Map<String, Object> data = new HashMap<>();
+                            data.put("firstName", firstName);
+                            data.put("lastName", lastName);
+                            firestore.collection("users").add(data)
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            Intent intent = new Intent(RegisterActivity.this, ItemFeedActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(RegisterActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                         } else {
                             Toast.makeText(RegisterActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }
@@ -110,7 +133,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         if (!isError) {
-            registerUser(email.getText().toString(), password.getText().toString());
+            registerUser(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), password.getText().toString());
         }
     }
 }
