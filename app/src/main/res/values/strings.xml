@@ -17,4 +17,18 @@
     <string name="place_holder_title">Place holder title</string>
     <string name="_12_34">12.34</string>
     <string name="add_picture_image">Add picture image</string>
+    <string name="user_stats">User Stats</string>
+    <string name="trade_history">Trade History</string>
+    <string name="user_name">User Name</string>
+    <string name="member_since_00_jan_2000">Member Since: 00 Jan 2000</string>
+    <string name="technology">Technology</string>
+    <string name="clothing">Clothing</string>
+    <string name="furnishings">Furnishings</string>
+    <string name="sporting_goods">Sporting Goods</string>
+    <string name="frequency_of_trade_categories">Frequency of Trade Categories (%):</string>
+    <string name="technology_graph">Technology</string>
+    <string name="clothing_graph">Clothing</string>
+    <string name="furnishings_graph">Furnishings</string>
+    <string name="sporting_goods_graph">Sporting Goods</string>
+    <string name="zero">0</string>
 </resources>
