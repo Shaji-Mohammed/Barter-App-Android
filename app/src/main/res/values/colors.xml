@@ -13,6 +13,7 @@
     <color name="gradEnd">#67EFC8</color>
     <color name="gradStart">#63C9FF</color>
     <color name="grey">#E5E5E5</color>
+    <color name="blueBlack">#111f28</color>
 
 
 >>>>>>> app/src/main/res/values/colors.xml
