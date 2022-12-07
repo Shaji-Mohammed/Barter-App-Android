@@ -22,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -66,13 +67,6 @@ public class RegisterActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
     }
 
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-    }
-
     private void registerUser(String firstName, String lastName, String email, String password) {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -83,22 +77,23 @@ public class RegisterActivity extends AppCompatActivity {
                             Map<String, Object> data = new HashMap<>();
                             data.put("firstName", firstName);
                             data.put("lastName", lastName);
-                            firestore.collection("users").add(data)
-                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            firestore.collection("users").document(Objects.requireNonNull(firebaseAuth.getUid())).set(data)
+                                    .addOnSuccessListener((new OnSuccessListener<Void>() {
                                         @Override
-                                        public void onSuccess(DocumentReference documentReference) {
+                                        public void onSuccess(Void unused) {
                                             Intent intent = new Intent(RegisterActivity.this, ItemFeedActivity.class);
                                             startActivity(intent);
                                         }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
+                                    }))
+                                    .addOnFailureListener((new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
                                             Toast.makeText(RegisterActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+
                                         }
-                                    });
+                                    }));
                         } else {
-                            Toast.makeText(RegisterActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "Invalid Credentials.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
