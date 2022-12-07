@@ -44,7 +44,7 @@ public class Item {
         return name;
     }
 
-    public double getValue() {
+    public int getValue() {
         return value;
     }
 

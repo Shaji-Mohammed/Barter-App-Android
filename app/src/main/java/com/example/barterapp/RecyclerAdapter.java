@@ -52,7 +52,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     public void onBindViewHolder(@NonNull RecyclerAdapter.MyViewHolder holder, int position) {
         String itemName = itemsList.get(position).getName();
         String seller = itemsList.get(position).getOwner();
-        String value = String.valueOf(itemsList.get(position).getValue());
+        String value = "$" + itemsList.get(position).getValue();
         Image image = itemsList.get(position).getImage();
 
         holder.itemName.setText(itemName);
@@ -64,5 +64,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @Override
     public int getItemCount() {
         return itemsList.size();
+    }
+
+    public void clear() {
+        int size = itemsList.size();
+        itemsList.clear();
+        notifyItemRangeRemoved(0, size);
     }
 }

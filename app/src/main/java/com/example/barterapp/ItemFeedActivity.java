@@ -1,5 +1,7 @@
 package com.example.barterapp;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -14,7 +16,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +37,7 @@ public class ItemFeedActivity extends AppCompatActivity {
     private RecyclerAdapter adapter;
 
     FirebaseAuth firebaseAuth;
+    FirebaseFirestore firestore;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -37,8 +48,22 @@ public class ItemFeedActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        setItemInfo();
+        firestore = FirebaseFirestore.getInstance();
+
         setAdapter();
+
+        firestore.collection("trades").get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                setItemInfo(task.getResult());
+            }
+        });
+//        firestore.collection("trades").addSnapshotListener((value, error) -> {
+//            if (error != null) {
+//                return;
+//            }
+//
+//            setItemInfo(value);
+//        });
 
         SearchView searchView = findViewById(R.id.searchView);
         searchView.clearFocus();
@@ -61,15 +86,6 @@ public class ItemFeedActivity extends AppCompatActivity {
             public void onClick(View view) { switchToTradeCreationFormWindow(); }
         });
 
-        Button logoutButton = findViewById(R.id.logout);
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                firebaseAuth.signOut();
-                switchToLoginWindow();
-            }
-        });
-
         Button btn = (Button)findViewById(R.id.profile_button);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,22 +103,42 @@ public class ItemFeedActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    private void setItemInfo() {
-        //Dummy data for testing
-        itemsList.add(new Item("Tesla Model S", 500, "Elon Musk", null));
-        itemsList.add(new Item("Iphone 5s", 100, "Lisa",null));
-        itemsList.add(new Item("Mazda 6", 250, "Bob",null));
-        itemsList.add(new Item("Bottle", 15, "Lewis",null));
-        itemsList.add(new Item("Toyota Camry", 125, "david",null));
+    @SuppressLint("NotifyDataSetChanged")
+    private void setItemInfo(QuerySnapshot snapshot) {
+        itemsList.clear();
+        for (DocumentSnapshot doc: snapshot) {
+            if (!doc.exists()) {
+                continue;
+            }
+
+            DocumentReference ownerRef = null;
+            try {
+                ownerRef = doc.getDocumentReference("owner");
+            } catch (RuntimeException e) {
+                Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
+            }
+//                    Toast.makeText(this, ownerRef.getId(), Toast.LENGTH_LONG).show();
+
+            if (ownerRef != null) {
+//                Toast.makeText(this, ownerRef.getId(), Toast.LENGTH_LONG).show();
+                firestore.collection("users").document(ownerRef.getId()).get()
+                        .addOnCompleteListener(ownerTask -> {
+                            if (ownerTask.getResult().exists()) {
+                                itemsList.add(new Item(
+                                        doc.getString("name"),
+                                        doc.getDouble("estimatedPrice").intValue(),
+                                        "HI",
+                                        null
+                                ));
+                            }
+                            adapter.notifyItemInserted(itemsList.size() - 1);
+                        });
+            }
+        }
     }
 
     public void switchToTradeCreationFormWindow() {
         Intent intent = new Intent(this, TradeCreationFormActivity.class);
-        startActivity(intent);
-    }
-
-    public void switchToLoginWindow() {
-        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 
