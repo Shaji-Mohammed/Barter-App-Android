@@ -1,5 +1,6 @@
 package com.example.barterapp;
 
+import android.content.Intent;
 import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         private TextView seller;
         private TextView value;
         private ImageView image;
+        private TextView tradeId;
 
         public MyViewHolder(final View itemView) {
             super(itemView);
@@ -40,6 +42,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             seller = itemView.findViewById(R.id.textView3);
             value = itemView.findViewById(R.id.textView);
             image = itemView.findViewById(R.id.imageView3);
+            tradeId = itemView.findViewById(R.id.trade_layout_id);
+
+            itemView.setOnClickListener(view -> {
+                Intent intent = new Intent(itemView.getContext(), TradeActivity.class);
+                intent.putExtra("tradeId", tradeId.getText().toString());
+                itemView.getContext().startActivity(intent);
+            });
         }
     }
 
@@ -57,6 +66,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         String value = "$" + itemsList.get(position).getValue();
         String image = itemsList.get(position).getImage();
 
+        holder.tradeId.setText(itemsList.get(position).getId());
         holder.itemName.setText(itemName);
         holder.seller.setText(seller);
         holder.value.setText(value);

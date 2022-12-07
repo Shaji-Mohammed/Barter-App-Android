@@ -125,6 +125,7 @@ public class ItemFeedActivity extends AppCompatActivity {
                         .addOnCompleteListener(ownerTask -> {
                             if (ownerTask.getResult().exists()) {
                                 itemsList.add(new Item(
+                                        doc.getId(),
                                         doc.getString("name"),
                                         doc.getDouble("estimatedPrice").intValue(),
                                         ownerTask.getResult().getString("firstName") + " " + ownerTask.getResult().getString("lastName"),
@@ -137,7 +138,7 @@ public class ItemFeedActivity extends AppCompatActivity {
         }
     }
 
-    public void switchToTradeCreationFormWindow() {
+    private void switchToTradeCreationFormWindow() {
         Intent intent = new Intent(this, TradeCreationFormActivity.class);
         startActivity(intent);
     }

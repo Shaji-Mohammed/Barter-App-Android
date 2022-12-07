@@ -4,12 +4,14 @@ import android.media.Image;
 
 public class Item {
 
+    private String id;
     public String name;
     public int value;
     public String owner;
     public String image;
 
-    public Item(String name, int value, String owner, String image) {
+    public Item(String id, String name, int value, String owner, String image) {
+        this.id = id;
         this.name = name;
         this.value = value;
         this.owner = owner;
@@ -18,6 +20,10 @@ public class Item {
 
     public Item() {
 
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getImage() {
