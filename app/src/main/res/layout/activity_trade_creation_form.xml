@@ -66,15 +66,25 @@
         <EditText
             android:id="@+id/trade_create_estimate"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:ems="10"
             android:hint="10"
             android:inputType="number" />
 
         <Button
-            android:id="@+id/createItemSubmitButton"
+            android:id="@+id/trade_create_image"
+            android:layout_width="170dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Upload Image"
+            app:backgroundTint="#616161" />
+
+        <Button
+            android:id="@+id/trade_create_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Create" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

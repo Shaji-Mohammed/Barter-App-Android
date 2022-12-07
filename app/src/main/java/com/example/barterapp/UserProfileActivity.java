@@ -3,6 +3,7 @@ package com.example.barterapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -38,11 +39,17 @@ public class UserProfileActivity extends AppCompatActivity {
         nameDisplay = findViewById(R.id.profile_name);
         emailDisplay = findViewById(R.id.profile_email);
         ImageView settingsButton = findViewById(R.id.profile_settings);
+        Button backButton = findViewById(R.id.profile_back);
 
         settingsButton.setOnClickListener(view -> {
             auth.signOut();
             switchToLoginWindow();
         });
+
+        backButton.setOnClickListener(view -> {
+            switchToItemFeedWindow();
+        });
+
         // Set fields
         emailDisplay.setText(user.getEmail());
 
@@ -57,6 +64,11 @@ public class UserProfileActivity extends AppCompatActivity {
                     );
                 }
             });
+    }
+
+    private void switchToItemFeedWindow() {
+        Intent intent = new Intent(this, ItemFeedActivity.class);
+        startActivity(intent);
     }
 
     public void switchToLoginWindow() {

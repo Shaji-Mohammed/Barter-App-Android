@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,12 +55,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         String itemName = itemsList.get(position).getName();
         String seller = itemsList.get(position).getOwner();
         String value = "$" + itemsList.get(position).getValue();
-        Image image = itemsList.get(position).getImage();
+        String image = itemsList.get(position).getImage();
 
         holder.itemName.setText(itemName);
         holder.seller.setText(seller);
         holder.value.setText(value);
-//        holder.image.setImageURI();
+        if (image != null) {
+            Picasso.get().load(image).into(holder.image);
+        }
     }
 
     @Override

@@ -18,12 +18,13 @@ public class Trade {
         this.firestore = firestore;
     }
 
-    public Task<DocumentReference> save(String userId, String name, String desc, Double estimatedPrice) {
+    public Task<DocumentReference> save(String userId, String name, String desc, int estimatedPrice, String imageUrl) {
         Map<String, Object> data = new HashMap<>();
         data.put("owner", firestore.document("users/" + userId));
         data.put("name", name);
         data.put("desc", desc);
         data.put("estimatedPrice", estimatedPrice);
+        data.put("imageUrl", imageUrl);
         data.put("posted", new Timestamp(new Date()));
         return this.firestore.collection("trades").add(data);
     }

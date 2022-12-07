@@ -127,8 +127,8 @@ public class ItemFeedActivity extends AppCompatActivity {
                                 itemsList.add(new Item(
                                         doc.getString("name"),
                                         doc.getDouble("estimatedPrice").intValue(),
-                                        "HI",
-                                        null
+                                        ownerTask.getResult().getString("firstName") + " " + ownerTask.getResult().getString("lastName"),
+                                        doc.getString("imageUrl")
                                 ));
                             }
                             adapter.notifyItemInserted(itemsList.size() - 1);
