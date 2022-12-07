@@ -51,7 +51,7 @@ public class FormValidatorTest {
     @Test
     public void checkIfItemNameIsValid() {
         assertTrue(FormValidator.isValidItemName("Cat"));
-        assertTrue(FormValidator.isValidItemDesc("Shirt"));
+        assertTrue(FormValidator.isValidItemName("Shirt"));
     }
 
     @Test
