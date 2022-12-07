@@ -11,6 +11,7 @@
 - Tyler Bechtold ty907567@dal.ca - Developer
 ' [Carmahn McCalla](cmccalla@dal.ca) - *(Developer)*
 - Mehjabeen Bushra Reza - Developer
+- Shaji Mohammed (sh412475@dal.ca) - Developer
 
 ### Prerequisites
 

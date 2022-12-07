@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gradEnd">#67EFC8</color>
+    <color name="gradStart">#63C9FF</color>
+    <color name="grey">#E5E5E5</color>
+    <color name="blueBlack">#111f28</color>
+     <color name="green">#CDDC39</color>
+    <color name="dataone">#FFA726</color>
+    <color name="datatwo">#66BB6A</color>
+    <color name="datathree">#EF5350</color>
+    <color name="datafour">#29B6F6</color>
 </resources>
